@@ -42,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(jpaUserDetailsService).passwordEncoder(passwordEncoder());
+        //auth.userDetailsService(jpaUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.authenticationProvider(new LoginAuthenticationProvider(jpaUserDetailsService));
     }
 
     //不定义没有password grant_type
@@ -51,4 +52,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+    
 }
